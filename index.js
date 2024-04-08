@@ -2,6 +2,11 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors")
+const movieRoutes = require("./src/routes/movie_routes");
+// bodyParser es un middleware de express
+// lo que hace es parsear el cuerpo de las solicitudes entrantes
+// en formato JSON, multipartes y lo convierte en un objeto JavaScript
+const bodyParser = require("body-parser")
 
 
 // poder acceder a leer el archivo .env
@@ -30,3 +35,6 @@ const mongo_connect = ()=>{
 
 
 mongo_connect();
+
+// Rutas
+app.use('/api/v1/movies', movieRoutes)
