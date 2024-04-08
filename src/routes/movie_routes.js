@@ -5,7 +5,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/avatars');
+        cb(null, 'uploads/poster');
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -15,15 +15,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // http://localhost:3000/api/v1/movies/new-movie
-router.post("/new-movie", upload.array('avatar'), movieController.createMovie);
+router.post("/new-movie", upload.array('poster'), movieController.createMovie);
 // http://localhost:3000/api/v1/movies/
 router.get("/", movieController.listMovies);
 // http://localhost:3000/api/v1/movies/:id
 router.get("/:id", movieController.getMovie);
 // http://localhost:3000/api/v1/movies/edit/:id
-router.patch("/edit/:id", upload.single('avatar'), movieController.editMovie);
+router.patch("/edit/:id", upload.single('poster'), movieController.editMovie);
 // http://localhost:3000/api/v1/movies/delete/:id
 router.delete("/delete/:id", movieController.deleteMovie);
+
 
 
 module.exports = router 

@@ -5,37 +5,34 @@ const createMovie = async (req, res) => {
     const {
       title,
       description,
-      realease_date,
+      release_date,
       genre,
       director,
       cast,
       duration,
       rating,
       language,
-      poster,
       trailer,
-      production,
+      production_company,
       country
     } = req.body;
 
-    const avatar = req.file ? req.file.filename : null;
-    console.log(avatar);
+    const posters = req.files.map(file => file.filename);   
 
     const newMovie = await movieModel.create({
       title,
       description,
-      realease_date,
+      release_date,
       genre,
       director,
       cast,
       duration,
       rating,
       language,
-      poster,
+      poster:posters,
       trailer,
-      production,
-      country,
-      avatar
+      production_company,
+      country
     });
     console.log(newMovie);
 
@@ -82,13 +79,12 @@ const editMovie = async (req, res) => {
       poster,
       trailer,
       production,
-      country,
-      avatar
+      country
     } = req.body;
 
     const movieEdit = {};
 
-    movieEdit.avatar = req.file ? req.file.filename : null;
+    movieEdit.poster = req.file ? req.file.filename : null;
 
     movieEdit.title = title;
     movieEdit.description = description;
@@ -99,7 +95,6 @@ const editMovie = async (req, res) => {
     movieEdit.duration = duration;
     movieEdit.rating = rating;
     movieEdit.language = language;
-    movieEdit.poster = poster;
     movieEdit.trailer = trailer;
     movieEdit.production = production;
     movieEdit.country = country;
@@ -115,20 +110,20 @@ const editMovie = async (req, res) => {
 };
 
 const deleteMovie = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await movieModel.findByIdAndDelete(id);
-        res.status(200).json()
+  try {
+    const { id } = req.params;
+    await movieModel.findByIdAndDelete(id);
+    res.status(200).json()
 
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
 module.exports = {
-    createMovie,
-    listMovies,
-    getMovie,
-    editMovie,
-    deleteMovie
-    };
+  createMovie,
+  listMovies,
+  getMovie,
+  editMovie,
+  deleteMovie
+};

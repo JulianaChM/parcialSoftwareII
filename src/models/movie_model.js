@@ -14,8 +14,7 @@ const movieSchema = new mongoose.Schema(
         poster: { type: Array, required: true },
         trailer: { type: String, required: true },
         production_company: { type: String, required: true },
-        country: { type: String, required: true },
-        avatar: { type: String, required: true }
+        country: { type: String, required: true }
     }
 )
 
