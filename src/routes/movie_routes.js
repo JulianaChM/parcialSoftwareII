@@ -1,6 +1,6 @@
 const movieController = require("../controllers/movie_controller");
 const express = require("express");
-const multer = requiere("multer");
+const multer = require("multer");
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -17,7 +17,7 @@ const upload = multer({ storage: storage });
 // http://localhost:3000/api/v1/movies/new-movie
 router.post("/new-movie", upload.single('avatar'), movieController.createMovie);
 // http://localhost:3000/api/v1/movies/
-router.get("/", movieController.listMovie);
+router.get("/", movieController.listMovies);
 // http://localhost:3000/api/v1/movies/:id
 router.get("/:id", movieController.getMovie);
 // http://localhost:3000/api/v1/movies/edit/:id
