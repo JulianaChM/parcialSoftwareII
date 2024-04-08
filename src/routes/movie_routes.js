@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // http://localhost:3000/api/v1/movies/new-movie
-router.post("/new-movie", upload.single('avatar'), movieController.createMovie);
+router.post("/new-movie", upload.array('avatar'), movieController.createMovie);
 // http://localhost:3000/api/v1/movies/
 router.get("/", movieController.listMovies);
 // http://localhost:3000/api/v1/movies/:id
